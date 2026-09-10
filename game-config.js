@@ -1,0 +1,49 @@
+/* 亂世殘卷平衡設定 v1
+ * 百分率以小數表示：3% = 0.03。修改後提交到 main，GitHub Pages 會自動發布。
+ */
+window.GameConfig={
+ schemaVersion:1,
+ loot:{
+  normalMultiplier:1,
+  hardMultiplier:3,
+  maximumChance:0.95,
+  bossTokenChance:0.90,
+  fullRestoreChance:{tier1:0.01,tier2:0.015,tier3:0.025,boss:0.06},
+  equipment:{normalBase:0.018,normalTier:0.018,normalFloor:0.01,normalCap:0.12,boss:0.18,necklaceBoss:0.001,setBase:0.28,setTier:0.035,setFloor:0.02,setCap:0.50,bossSet:0.55}
+ },
+ recovery:{
+  vitalityPerStep:5,
+  hpPerVitalityStep:5,
+  spiritPerStep:8,
+  mpPerSpiritStep:1,
+  incenseMp:5,
+  campHpRate:0.22,
+  campMpRate:0.18,
+  freeCampsPerFloor:5
+ },
+ exploration:{
+  mapWidth:17,
+  mapHeight:9,
+  obstacleBase:16,
+  obstaclePerFloor:1,
+  obstaclePerDepth:1,
+  normalMonsterBase:4,
+  resetMonsterBase:5,
+  monsterPerFloor:1,
+  monsterPerDepth:1,
+  hardExtraMonsters:3,
+  monsterMultiplier:1.3,
+  safeSteps:80,
+  overtimeHpRate:0.03,
+  recoveryEvents:2,
+  chestEvents:3,
+  npcEvents:1,
+  merchantEvents:1
+ },
+ difficulty:{
+  normal:{hp:1,atk:1,def:1,agi:1,reward:1,questReward:1},
+  hard:{hp:2.2,atk:1.7,def:1.45,agi:1.12,reward:1.6,questReward:2}
+ },
+ economy:{villageSaleChance:0.03,villageSaleMultiplier:0.70,retreatGoldLossRate:0.35},
+ battle:{autoSkillChance:0.72,maxManualItems:4,elementAdvantage:1.20,elementDisadvantage:0.85}
+};
