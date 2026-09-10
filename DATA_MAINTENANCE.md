@@ -25,7 +25,7 @@
 - `regionalDrops`：所有怪物共用的消耗品掉落。
 - `regions`、`quests`、`affixes`、`sets`：區域、任務、詞綴與套裝。
 
-每列的 `id` 是主鍵。`lootDrops.monsterId` 對應 `monsters.id`，`itemId` 對應 `materials.id`。
+每列的 `id` 是主鍵。`lootDrops.monsterId` 對應 `monsters.id`，`itemId` 對應 `materials.id`；`quests.floor` 對應 `regions.id`，每個區域樓層只能有一筆任務。
 
 ## 新增欄位
 
@@ -34,3 +34,10 @@
 3. 載入遊戲時 `migrate()` 會替過往未填資料列補上預設值。
 4. `validate()` 會檢查重複主鍵、遺失外鍵與不合法掉落率。
 5. 每次改版同步更新遊戲內 `ChangeLogSystem` 與 `CHANGELOG.md`。
+
+## 每次發布前檢查
+
+- 確認新功能是否需要新增或調整 `game-config.js` 參數。
+- 確認資料表欄位與 `schemas` 預設值一致。
+- 確認新舊資料列都具備必要欄位，並執行 `migrate()` 補齊。
+- 執行 `validate()` 檢查主鍵、外鍵、樓層關聯與機率範圍。
