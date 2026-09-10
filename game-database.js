@@ -1,9 +1,9 @@
-/* 亂世殘卷資料庫 v1
+/* 亂世殘卷資料庫 v2
  * 以資料表陣列維護。新增欄位時先更新 schemas 預設值；migrate() 會替所有舊資料列補齊。
  * id 是主鍵；lootDrops.monsterId 與 itemId 是外鍵。掉落率使用 0~1。
  */
 window.GameDatabase={
- schemaVersion:1,
+ schemaVersion:2,
  schemas:{
   "regions": {
     "id": null,
@@ -94,6 +94,7 @@ window.GameDatabase={
   },
   "quests": {
     "id": null,
+    "floor": 0,
     "name": "未命名委託",
     "d": "",
     "item": "任務品",
@@ -1622,6 +1623,7 @@ window.GameDatabase={
   "quests": [
     {
       "id": "herb_bundle",
+      "floor": 1,
       "name": "石縫裡的藥草",
       "d": "一名採藥人需要暗窟獸群活動處附近的青紋藥草。",
       "item": "青紋藥草",
@@ -1635,6 +1637,7 @@ window.GameDatabase={
     },
     {
       "id": "lost_seals",
+      "floor": 2,
       "name": "散落的鎮符",
       "d": "遊方術士請你從本層敵人附近尋回被風吹散的鎮符。",
       "item": "鎮符殘頁",
@@ -1648,6 +1651,7 @@ window.GameDatabase={
     },
     {
       "id": "silk_samples",
+      "floor": 3,
       "name": "腐絲標本",
       "d": "巡查者需要蟲群留下的腐絲標本，以確認蟲巢擴張方向。",
       "item": "腐絲標本",
@@ -1661,6 +1665,7 @@ window.GameDatabase={
     },
     {
       "id": "lost_feathers",
+      "floor": 4,
       "name": "失落的嵐羽",
       "d": "崖邊旅人請你尋回被飛行族捲走的嵐羽束。",
       "item": "嵐羽束",
@@ -1674,6 +1679,7 @@ window.GameDatabase={
     },
     {
       "id": "ancient_scales",
+      "floor": 5,
       "name": "古沼鱗紋",
       "d": "遺跡學者需要鱗族身上的紋片，解讀沼地石碑。",
       "item": "鱗紋片",
@@ -1688,7 +1694,6 @@ window.GameDatabase={
   ]
 },
  migrate(){for(const [name,schema] of Object.entries(this.schemas)){const table=this.tables[name]||(this.tables[name]=[]);for(const row of table)for(const [field,value] of Object.entries(schema))if(row[field]===undefined)row[field]=structuredClone(value)}return this},
- validate(){const errors=[],ids={};for(const [name,rows] of Object.entries(this.tables)){ids[name]=new Set;for(const row of rows){if('id'in row){if(!row.id)errors.push(name+' 有空白 id');else if(ids[name].has(row.id))errors.push(name+' 重複 id: '+row.id);else ids[name].add(row.id)}}}for(const r of this.tables.lootDrops){if(!ids.monsters.has(r.monsterId))errors.push('掉落表找不到怪物: '+r.monsterId);if(!ids.materials.has(r.itemId))errors.push('掉落表找不到素材: '+r.itemId);if(r.chance<0||r.chance>1)errors.push('掉落率超出範圍: '+r.monsterId+'/'+r.itemId)}for(const r of this.tables.regionalDrops){if(!ids.consumables.has(r.itemId))errors.push('區域掉落找不到道具: '+r.itemId)}if(errors.length)throw new Error('GameDatabase 驗證失敗\n'+errors.join('\n'));return true},
- apply(content){this.migrate().validate();const map=(name)=>Object.fromEntries(this.tables[name].map(({id,...row})=>[id,row]));content.regions=map('regions');content.monsters=this.tables.monsters.map(x=>({...x}));content.items=map('materials');content.consumables=map('consumables');content.shop=Object.fromEntries(this.tables.consumables.filter(x=>x.shop&&x.price!=null).map(({id,n,d,price})=>[id,{n,d,price}]));content.drops={};for(const r of this.tables.lootDrops)(content.drops[r.monsterId]??=[]).push({k:r.itemId,p:r.chance});content.regionalConsumables=this.tables.regionalDrops.map(r=>({k:r.itemId,p:r.chance}));content.equipmentBases=map('equipment');content.equipmentShop=this.tables.equipment.filter(x=>x.shop).map(x=>x.id);content.affixes=map('affixes');content.sets=map('sets');content.quests=map('quests');content.floorEnemies=Object.fromEntries(this.tables.regions.map(r=>[r.id,r.enemies]));content.bossByFloor=Object.fromEntries(this.tables.regions.map(r=>[r.id,r.boss]));return content}
+ validate(){const errors=[],ids={};for(const [name,rows] of Object.entries(this.tables)){ids[name]=new Set;for(const row of rows){if('id'in row){if(!row.id)errors.push(name+' 有空白 id');else if(ids[name].has(row.id))errors.push(name+' 重複 id: '+row.id);else ids[name].add(row.id)}}}for(const r of this.tables.lootDrops){if(!ids.monsters.has(r.monsterId))errors.push('掉落表找不到怪物: '+r.monsterId);if(!ids.materials.has(r.itemId))errors.push('掉落表找不到素材: '+r.itemId);if(r.chance<0||r.chance>1)errors.push('掉落率超出範圍: '+r.monsterId+'/'+r.itemId)}for(const r of this.tables.regionalDrops){if(!ids.consumables.has(r.itemId))errors.push('區域掉落找不到道具: '+r.itemId)}const questFloors=new Set;for(const q of this.tables.quests){const floor=String(q.floor);if(!ids.regions.has(floor))errors.push('任務表找不到樓層區域: '+q.id+'/'+q.floor);else if(questFloors.has(floor))errors.push('任務表樓層重複: '+q.floor);else questFloors.add(floor)}if(errors.length)throw new Error('GameDatabase 驗證失敗\n'+errors.join('\n'));return true},
+ apply(content){this.migrate().validate();const map=(name)=>Object.fromEntries(this.tables[name].map(({id,...row})=>[id,row]));content.regions=map('regions');content.monsters=this.tables.monsters.map(x=>({...x}));content.items=map('materials');content.consumables=map('consumables');content.shop=Object.fromEntries(this.tables.consumables.filter(x=>x.shop&&x.price!=null).map(({id,n,d,price})=>[id,{n,d,price}]));content.drops={};for(const r of this.tables.lootDrops)(content.drops[r.monsterId]??=[]).push({k:r.itemId,p:r.chance});content.regionalConsumables=this.tables.regionalDrops.map(r=>({k:r.itemId,p:r.chance}));content.equipmentBases=map('equipment');content.equipmentShop=this.tables.equipment.filter(x=>x.shop).map(x=>x.id);content.affixes=map('affixes');content.sets=map('sets');content.quests=Object.fromEntries(this.tables.quests.map(({floor,...row})=>[floor,row]));content.floorEnemies=Object.fromEntries(this.tables.regions.map(r=>[r.id,r.enemies]));content.bossByFloor=Object.fromEntries(this.tables.regions.map(r=>[r.id,r.boss]));return content}
 };
-
