@@ -1,9 +1,9 @@
-/* 亂世殘卷資料庫 v2
+/* 亂世殘卷資料庫 v3
  * 以資料表陣列維護。新增欄位時先更新 schemas 預設值；migrate() 會替所有舊資料列補齊。
  * id 是主鍵；lootDrops.monsterId 與 itemId 是外鍵。掉落率使用 0~1。
  */
 window.GameDatabase={
- schemaVersion:2,
+ schemaVersion:3,
  schemas:{
   "regions": {
     "id": null,
@@ -30,7 +30,8 @@ window.GameDatabase={
     ],
     "gold": 0,
     "exp": 0,
-    "boss": false
+    "boss": false,
+    "artRole": "creature"
   },
   "materials": {
     "id": null,
@@ -187,6 +188,7 @@ window.GameDatabase={
   "monsters": [
     {
       "id": "wolf",
+      "artRole": "wolf",
       "n": "太行灰狼",
       "icon": "🐺",
       "hp": 68,
@@ -204,6 +206,7 @@ window.GameDatabase={
     },
     {
       "id": "boar",
+      "artRole": "boar",
       "n": "裂牙山豬",
       "icon": "◆",
       "hp": 88,
@@ -220,6 +223,7 @@ window.GameDatabase={
     },
     {
       "id": "beastkin",
+      "artRole": "claws",
       "n": "荒徑獸兵",
       "icon": "♞",
       "hp": 80,
@@ -237,6 +241,7 @@ window.GameDatabase={
     },
     {
       "id": "fangLord",
+      "artRole": "clawsBoss",
       "n": "裂牙獸王",
       "icon": "王",
       "hp": 240,
@@ -255,6 +260,7 @@ window.GameDatabase={
     },
     {
       "id": "raider",
+      "artRole": "cleaver",
       "n": "飢民劫掠者",
       "icon": "♟",
       "hp": 82,
@@ -272,6 +278,7 @@ window.GameDatabase={
     },
     {
       "id": "adept",
+      "artRole": "talisman",
       "n": "黃巾符徒",
       "icon": "☷",
       "hp": 72,
@@ -288,6 +295,7 @@ window.GameDatabase={
     },
     {
       "id": "soldier",
+      "artRole": "spear",
       "n": "斷甲逃兵",
       "icon": "♜",
       "hp": 98,
@@ -304,6 +312,7 @@ window.GameDatabase={
     },
     {
       "id": "guardian",
+      "artRole": "glaiveBoss",
       "n": "地公祭將",
       "icon": "⚑",
       "hp": 315,
@@ -323,6 +332,7 @@ window.GameDatabase={
     },
     {
       "id": "spider",
+      "artRole": "spider",
       "n": "穴居毒蛛",
       "icon": "🕷",
       "hp": 76,
@@ -339,6 +349,7 @@ window.GameDatabase={
     },
     {
       "id": "mantis",
+      "artRole": "mantis",
       "n": "鐮足螳獸",
       "icon": "⌁",
       "hp": 88,
@@ -356,6 +367,7 @@ window.GameDatabase={
     },
     {
       "id": "beetle",
+      "artRole": "beetle",
       "n": "鐵背甲蟲",
       "icon": "⬢",
       "hp": 112,
@@ -372,6 +384,7 @@ window.GameDatabase={
     },
     {
       "id": "broodQueen",
+      "artRole": "spiderBoss",
       "n": "腐絲蟲后",
       "icon": "王",
       "hp": 380,
@@ -391,6 +404,7 @@ window.GameDatabase={
     },
     {
       "id": "hawk",
+      "artRole": "hawk",
       "n": "斷崖風鷹",
       "icon": "⌃",
       "hp": 86,
@@ -408,6 +422,7 @@ window.GameDatabase={
     },
     {
       "id": "caveBat",
+      "artRole": "bat",
       "n": "暮影翼蝠",
       "icon": "⌄",
       "hp": 82,
@@ -424,6 +439,7 @@ window.GameDatabase={
     },
     {
       "id": "windRaptor",
+      "artRole": "raptor",
       "n": "裂風翼衛",
       "icon": "♢",
       "hp": 105,
@@ -441,6 +457,7 @@ window.GameDatabase={
     },
     {
       "id": "stormRoc",
+      "artRole": "rocBoss",
       "n": "天嵐鵬王",
       "icon": "王",
       "hp": 445,
@@ -460,6 +477,7 @@ window.GameDatabase={
     },
     {
       "id": "lizardScout",
+      "artRole": "daggersLizard",
       "n": "沼地鱗斥候",
       "icon": "♙",
       "hp": 110,
@@ -477,6 +495,7 @@ window.GameDatabase={
     },
     {
       "id": "lizardShaman",
+      "artRole": "staffLizard",
       "n": "古沼鱗祭司",
       "icon": "☷",
       "hp": 98,
@@ -494,6 +513,7 @@ window.GameDatabase={
     },
     {
       "id": "lizardGuard",
+      "artRole": "shieldLizard",
       "n": "沉鱗重衛",
       "icon": "♜",
       "hp": 140,
@@ -511,6 +531,7 @@ window.GameDatabase={
     },
     {
       "id": "scaleWarlord",
+      "artRole": "glaiveLizardBoss",
       "n": "玄鱗戰主",
       "icon": "王",
       "hp": 540,

@@ -12,6 +12,7 @@
 - `difficulty`：普通／困難敵人與獎勵倍率。
 - `economy`：村莊特價及戰敗金幣損失。
 - `battle`：自動技能、道具次數與屬性相剋倍率。
+- `art`：原生像素尺寸、攻擊影格速度、待機速度與 NPC 肖像尺寸。
 
 ## 資料表
 
@@ -20,12 +21,14 @@
 - `materials`：素材主檔。
 - `consumables`：消耗品主檔與商店價格。
 - `equipment`：裝備主檔。
-- `monsters`：怪物基礎能力。
+- `monsters`：怪物基礎能力；`artRole` 決定像素造型及武器模組。
 - `lootDrops`：怪物與素材的掉落關聯。
 - `regionalDrops`：所有怪物共用的消耗品掉落。
 - `regions`、`quests`、`affixes`、`sets`：區域、任務、詞綴與套裝。
 
 每列的 `id` 是主鍵。`lootDrops.monsterId` 對應 `monsters.id`，`itemId` 對應 `materials.id`；`quests.floor` 對應 `regions.id`，每個區域樓層只能有一筆任務。
+
+`monsters.artRole` 可用值目前包含 `wolf`、`boar`、`claws`、`cleaver`、`talisman`、`spear`、`glaiveBoss`、`spider`、`mantis`、`beetle`、`hawk`、`bat`、`raptor`、`daggersLizard`、`staffLizard`、`shieldLizard` 與各首領變體。主角職業對應維護於 `pixel-art.js` 的 `HERO_ROLES`。
 
 ## 新增欄位
 
