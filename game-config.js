@@ -2,7 +2,7 @@
  * 百分率以小數表示：3% = 0.03。修改後提交到 main，GitHub Pages 會自動發布。
  */
 window.GameConfig={
- schemaVersion:2,
+ schemaVersion:3,
  loot:{
   normalMultiplier:1,
   hardMultiplier:3,
@@ -46,5 +46,6 @@ window.GameConfig={
  },
  economy:{villageSaleChance:0.03,villageSaleMultiplier:0.70,retreatGoldLossRate:0.35},
  battle:{autoSkillChance:0.72,maxManualItems:4,elementAdvantage:1.20,elementDisadvantage:0.85},
- art:{pixelSize:64,attackFrameMs:90,idleFrameMs:420,npcPortraitSize:64}
+ art:{pixelSize:64,npcPortraitSize:64,enabled:true,spriteSize:128,lowSpriteSize:64,attackFrameMs:140,idleFrameMs:500}
 };
+

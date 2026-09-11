@@ -39,3 +39,4 @@
  const render=DungeonSystem.render.bind(DungeonSystem);DungeonSystem.render=function(){render();const d=GameState.data.dungeon;if(!d)return;const map=$('#map');map.style.setProperty('--map-columns',d.grid[0].length);map.setAttribute('aria-label',`${Content.regions[d.floor].n}，${d.grid[0].length}欄${d.grid.length}列地圖`);const info=$('#dungeonInfo');if(info)info.innerHTML=info.innerHTML.replace(/步數：<strong>\d+\/\d+<\/strong>/,`步數：<strong>${d.steps}/${E.safeSteps}</strong>`);$('#campBtn').textContent=(d.restCount||0)<R.freeCampsPerFloor?`休整（免費${R.freeCampsPerFloor-(d.restCount||0)}次）`:'休整（步數+1）'};
  console.info(`亂世殘卷設定已載入｜CONFIG v${C.schemaVersion}｜DB v${window.GameDatabase?.schemaVersion||'內建'}`);
 })();
+

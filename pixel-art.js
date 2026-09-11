@@ -79,10 +79,11 @@
 
  const originalPaint=SpriteSystem.paint.bind(SpriteSystem),originalAnimate=SpriteSystem.animate.bind(SpriteSystem);
  SpriteSystem.paint=function(canvas,type,key){if(QualitySystem.low)return PixelSpriteSystem.paint(canvas,type,key,0);return originalPaint(canvas,type,key)};
- SpriteSystem.animate=function(attacker,index=BattleSystem.targetIndex){originalAnimate(attacker,index);if(!QualitySystem.low)return;const canvas=attacker==='hero'?document.querySelector('#heroSprite'):document.querySelector('#enemySprite'+index);if(!canvas)return;const old=timers.get(canvas);if(old)clearTimeout(old);let frame=1;const next=()=>{const type=canvas.dataset.pixelType||'hero',key=canvas.dataset.pixelKey||(type==='hero'?GameState.data.hero.cls:BattleSystem.enemies[index]?.id);PixelSpriteSystem.paint(canvas,type,key,frame);frame++;if(frame<=3)timers.set(canvas,setTimeout(next,FRAME_MS));else timers.set(canvas,setTimeout(()=>PixelSpriteSystem.paint(canvas,type,key,0),FRAME_MS))};next()};
+ SpriteSystem.animate=function(attacker,index=BattleSystem.targetIndex){originalAnimate(attacker,index);if(!QualitySystem.low||attacker==='hero')return;const canvas=attacker==='hero'?document.querySelector('#heroSprite'):document.querySelector('#enemySprite'+index);if(!canvas)return;const old=timers.get(canvas);if(old)clearTimeout(old);let frame=1;const next=()=>{const type=canvas.dataset.pixelType||'hero',key=canvas.dataset.pixelKey||(type==='hero'?GameState.data.hero.cls:BattleSystem.enemies[index]?.id);PixelSpriteSystem.paint(canvas,type,key,frame);frame++;if(frame<=3)timers.set(canvas,setTimeout(next,FRAME_MS));else timers.set(canvas,setTimeout(()=>PixelSpriteSystem.paint(canvas,type,key,0),FRAME_MS))};next()};
  NPCSystem.render=function(canvas,key){if(!canvas||!NPCSystem.profiles[key])return;PixelSpriteSystem.npc(canvas,key)};
  const originalQualityApply=QualitySystem.apply.bind(QualitySystem);
  QualitySystem.apply=function(redraw=true){originalQualityApply(redraw);const b=document.querySelector('#qualityBtn');if(this.low&&b){b.textContent='畫質・像素';b.setAttribute('aria-label','畫質：原生64像素動作模式');b.title='切換回目前的原畫風格'}const portrait=document.querySelector('#npcPortrait'),key=portrait?.dataset.npc;if(portrait&&key)NPCSystem.render(portrait,key)};
  document.body.classList.add('pixel-module-ready');
  QualitySystem.apply(false);
 })();
+

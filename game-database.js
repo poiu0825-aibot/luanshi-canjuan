@@ -1,9 +1,6 @@
-/* 亂世殘卷資料庫 v3
- * 以資料表陣列維護。新增欄位時先更新 schemas 預設值；migrate() 會替所有舊資料列補齊。
- * id 是主鍵；lootDrops.monsterId 與 itemId 是外鍵。掉落率使用 0~1。
- */
+/* 亂世殘卷資料庫 v4：保留怪物 artRole，新增武器造型與 NPC 圖片映射。 */
 window.GameDatabase={
- schemaVersion:3,
+ schemaVersion:4,
  schemas:{
   "regions": {
     "id": null,
@@ -67,7 +64,8 @@ window.GameDatabase={
     "atk": 0,
     "def": 0,
     "price": null,
-    "shop": false
+    "shop": false,
+    "weaponStyle": null
   },
   "affixes": {
     "id": null,
@@ -105,6 +103,17 @@ window.GameDatabase={
       "gold": 0,
       "exp": 0
     }
+  },
+  "artProfiles": {
+    "id": null,
+    "src": "assets/actors.png",
+    "row": 0,
+    "columns": 4,
+    "rows": 4
+  },
+  "npcPortraits": {
+    "id": null,
+    "src": ""
   }
 },
  tables:{
@@ -188,7 +197,6 @@ window.GameDatabase={
   "monsters": [
     {
       "id": "wolf",
-      "artRole": "wolf",
       "n": "太行灰狼",
       "icon": "🐺",
       "hp": 68,
@@ -202,11 +210,11 @@ window.GameDatabase={
         "howl"
       ],
       "gold": 18,
-      "exp": 30
+      "exp": 30,
+      "artRole": "wolf"
     },
     {
       "id": "boar",
-      "artRole": "boar",
       "n": "裂牙山豬",
       "icon": "◆",
       "hp": 88,
@@ -219,11 +227,11 @@ window.GameDatabase={
         "heavy"
       ],
       "gold": 22,
-      "exp": 32
+      "exp": 32,
+      "artRole": "boar"
     },
     {
       "id": "beastkin",
-      "artRole": "claws",
       "n": "荒徑獸兵",
       "icon": "♞",
       "hp": 80,
@@ -237,11 +245,11 @@ window.GameDatabase={
         "heavy"
       ],
       "gold": 26,
-      "exp": 36
+      "exp": 36,
+      "artRole": "claws"
     },
     {
       "id": "fangLord",
-      "artRole": "clawsBoss",
       "n": "裂牙獸王",
       "icon": "王",
       "hp": 240,
@@ -256,11 +264,11 @@ window.GameDatabase={
       ],
       "gold": 105,
       "exp": 145,
-      "boss": true
+      "boss": true,
+      "artRole": "clawsBoss"
     },
     {
       "id": "raider",
-      "artRole": "cleaver",
       "n": "飢民劫掠者",
       "icon": "♟",
       "hp": 82,
@@ -274,11 +282,11 @@ window.GameDatabase={
         "heavy"
       ],
       "gold": 20,
-      "exp": 28
+      "exp": 28,
+      "artRole": "cleaver"
     },
     {
       "id": "adept",
-      "artRole": "talisman",
       "n": "黃巾符徒",
       "icon": "☷",
       "hp": 72,
@@ -291,11 +299,11 @@ window.GameDatabase={
         "spell"
       ],
       "gold": 24,
-      "exp": 32
+      "exp": 32,
+      "artRole": "talisman"
     },
     {
       "id": "soldier",
-      "artRole": "spear",
       "n": "斷甲逃兵",
       "icon": "♜",
       "hp": 98,
@@ -308,11 +316,11 @@ window.GameDatabase={
         "heavy"
       ],
       "gold": 28,
-      "exp": 36
+      "exp": 36,
+      "artRole": "spear"
     },
     {
       "id": "guardian",
-      "artRole": "glaiveBoss",
       "n": "地公祭將",
       "icon": "⚑",
       "hp": 315,
@@ -328,11 +336,11 @@ window.GameDatabase={
       ],
       "gold": 145,
       "exp": 205,
-      "boss": true
+      "boss": true,
+      "artRole": "glaiveBoss"
     },
     {
       "id": "spider",
-      "artRole": "spider",
       "n": "穴居毒蛛",
       "icon": "🕷",
       "hp": 76,
@@ -345,11 +353,11 @@ window.GameDatabase={
         "quick"
       ],
       "gold": 22,
-      "exp": 34
+      "exp": 34,
+      "artRole": "spider"
     },
     {
       "id": "mantis",
-      "artRole": "mantis",
       "n": "鐮足螳獸",
       "icon": "⌁",
       "hp": 88,
@@ -363,11 +371,11 @@ window.GameDatabase={
         "heavy"
       ],
       "gold": 31,
-      "exp": 42
+      "exp": 42,
+      "artRole": "mantis"
     },
     {
       "id": "beetle",
-      "artRole": "beetle",
       "n": "鐵背甲蟲",
       "icon": "⬢",
       "hp": 112,
@@ -380,11 +388,11 @@ window.GameDatabase={
         "heavy"
       ],
       "gold": 34,
-      "exp": 45
+      "exp": 45,
+      "artRole": "beetle"
     },
     {
       "id": "broodQueen",
-      "artRole": "spiderBoss",
       "n": "腐絲蟲后",
       "icon": "王",
       "hp": 380,
@@ -400,11 +408,11 @@ window.GameDatabase={
       ],
       "gold": 190,
       "exp": 260,
-      "boss": true
+      "boss": true,
+      "artRole": "spiderBoss"
     },
     {
       "id": "hawk",
-      "artRole": "hawk",
       "n": "斷崖風鷹",
       "icon": "⌃",
       "hp": 86,
@@ -418,11 +426,11 @@ window.GameDatabase={
         "howl"
       ],
       "gold": 34,
-      "exp": 48
+      "exp": 48,
+      "artRole": "hawk"
     },
     {
       "id": "caveBat",
-      "artRole": "bat",
       "n": "暮影翼蝠",
       "icon": "⌄",
       "hp": 82,
@@ -435,11 +443,11 @@ window.GameDatabase={
         "poison"
       ],
       "gold": 35,
-      "exp": 49
+      "exp": 49,
+      "artRole": "bat"
     },
     {
       "id": "windRaptor",
-      "artRole": "raptor",
       "n": "裂風翼衛",
       "icon": "♢",
       "hp": 105,
@@ -453,11 +461,11 @@ window.GameDatabase={
         "heavy"
       ],
       "gold": 42,
-      "exp": 58
+      "exp": 58,
+      "artRole": "raptor"
     },
     {
       "id": "stormRoc",
-      "artRole": "rocBoss",
       "n": "天嵐鵬王",
       "icon": "王",
       "hp": 445,
@@ -473,11 +481,11 @@ window.GameDatabase={
       ],
       "gold": 235,
       "exp": 325,
-      "boss": true
+      "boss": true,
+      "artRole": "rocBoss"
     },
     {
       "id": "lizardScout",
-      "artRole": "daggersLizard",
       "n": "沼地鱗斥候",
       "icon": "♙",
       "hp": 110,
@@ -491,11 +499,11 @@ window.GameDatabase={
         "break"
       ],
       "gold": 43,
-      "exp": 62
+      "exp": 62,
+      "artRole": "daggersLizard"
     },
     {
       "id": "lizardShaman",
-      "artRole": "staffLizard",
       "n": "古沼鱗祭司",
       "icon": "☷",
       "hp": 98,
@@ -509,11 +517,11 @@ window.GameDatabase={
         "summon"
       ],
       "gold": 48,
-      "exp": 68
+      "exp": 68,
+      "artRole": "staffLizard"
     },
     {
       "id": "lizardGuard",
-      "artRole": "shieldLizard",
       "n": "沉鱗重衛",
       "icon": "♜",
       "hp": 140,
@@ -527,11 +535,11 @@ window.GameDatabase={
         "quick"
       ],
       "gold": 52,
-      "exp": 74
+      "exp": 74,
+      "artRole": "shieldLizard"
     },
     {
       "id": "scaleWarlord",
-      "artRole": "glaiveLizardBoss",
       "n": "玄鱗戰主",
       "icon": "王",
       "hp": 540,
@@ -547,7 +555,8 @@ window.GameDatabase={
       ],
       "gold": 310,
       "exp": 420,
-      "boss": true
+      "boss": true,
+      "artRole": "glaiveLizardBoss"
     }
   ],
   "materials": [
@@ -1027,7 +1036,8 @@ window.GameDatabase={
       "atk": 3,
       "def": 0,
       "price": 85,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "sword"
     },
     {
       "id": "metalSword2",
@@ -1038,7 +1048,8 @@ window.GameDatabase={
       "atk": 6,
       "def": 0,
       "price": 180,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "sword"
     },
     {
       "id": "metalSword3",
@@ -1048,7 +1059,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 9,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "sword"
     },
     {
       "id": "metalSword4",
@@ -1058,7 +1070,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 12,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "sword"
     },
     {
       "id": "woodBow1",
@@ -1069,7 +1082,8 @@ window.GameDatabase={
       "atk": 3,
       "def": 0,
       "price": 85,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "bow"
     },
     {
       "id": "woodBow2",
@@ -1080,7 +1094,8 @@ window.GameDatabase={
       "atk": 6,
       "def": 0,
       "price": 180,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "bow"
     },
     {
       "id": "woodBow3",
@@ -1090,7 +1105,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 9,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "bow"
     },
     {
       "id": "woodBow4",
@@ -1100,7 +1116,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 12,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "bow"
     },
     {
       "id": "waterStaff1",
@@ -1111,7 +1128,8 @@ window.GameDatabase={
       "atk": 3,
       "def": 0,
       "price": 85,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "staff"
     },
     {
       "id": "waterStaff2",
@@ -1122,7 +1140,8 @@ window.GameDatabase={
       "atk": 6,
       "def": 0,
       "price": 180,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "staff"
     },
     {
       "id": "waterStaff3",
@@ -1132,7 +1151,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 9,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "staff"
     },
     {
       "id": "waterStaff4",
@@ -1142,7 +1162,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 12,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "staff"
     },
     {
       "id": "fireBlade1",
@@ -1153,7 +1174,8 @@ window.GameDatabase={
       "atk": 3,
       "def": 0,
       "price": 85,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "blade"
     },
     {
       "id": "fireBlade2",
@@ -1164,7 +1186,8 @@ window.GameDatabase={
       "atk": 6,
       "def": 0,
       "price": 180,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "blade"
     },
     {
       "id": "fireBlade3",
@@ -1174,7 +1197,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 9,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "blade"
     },
     {
       "id": "fireBlade4",
@@ -1184,7 +1208,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 12,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "blade"
     },
     {
       "id": "earthHammer1",
@@ -1195,7 +1220,8 @@ window.GameDatabase={
       "atk": 3,
       "def": 0,
       "price": 85,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "hammer"
     },
     {
       "id": "earthHammer2",
@@ -1206,7 +1232,8 @@ window.GameDatabase={
       "atk": 6,
       "def": 0,
       "price": 180,
-      "shop": true
+      "shop": true,
+      "weaponStyle": "hammer"
     },
     {
       "id": "earthHammer3",
@@ -1216,7 +1243,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 9,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "hammer"
     },
     {
       "id": "earthHammer4",
@@ -1226,7 +1254,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 12,
       "def": 0,
-      "shop": false
+      "shop": false,
+      "weaponStyle": "hammer"
     },
     {
       "id": "clothHelm",
@@ -1236,7 +1265,8 @@ window.GameDatabase={
       "atk": 0,
       "def": 1,
       "price": 55,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "ironHelm",
@@ -1246,7 +1276,8 @@ window.GameDatabase={
       "atk": 0,
       "def": 2,
       "price": 120,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "ringHelm",
@@ -1255,7 +1286,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 0,
       "def": 3,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "generalHelm",
@@ -1264,7 +1296,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 0,
       "def": 4,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "clothArmor",
@@ -1274,7 +1307,8 @@ window.GameDatabase={
       "atk": 0,
       "def": 2,
       "price": 70,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "ironArmor",
@@ -1284,7 +1318,8 @@ window.GameDatabase={
       "atk": 0,
       "def": 4,
       "price": 160,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "ringArmor",
@@ -1293,7 +1328,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 0,
       "def": 6,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "darkArmor",
@@ -1302,7 +1338,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 0,
       "def": 8,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "clothGloves",
@@ -1312,7 +1349,8 @@ window.GameDatabase={
       "atk": 1,
       "def": 1,
       "price": 60,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "ironGloves",
@@ -1322,7 +1360,8 @@ window.GameDatabase={
       "atk": 2,
       "def": 2,
       "price": 135,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "warGloves",
@@ -1331,7 +1370,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 3,
       "def": 3,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "obsidianGloves",
@@ -1340,7 +1380,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 4,
       "def": 4,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "leatherBelt",
@@ -1350,7 +1391,8 @@ window.GameDatabase={
       "atk": 0,
       "def": 1,
       "price": 50,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "bronzeBelt",
@@ -1360,7 +1402,8 @@ window.GameDatabase={
       "atk": 0,
       "def": 2,
       "price": 110,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "warBelt",
@@ -1369,7 +1412,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 1,
       "def": 3,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "jadeBelt",
@@ -1378,7 +1422,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 2,
       "def": 4,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "clothPants",
@@ -1388,7 +1433,8 @@ window.GameDatabase={
       "atk": 0,
       "def": 1,
       "price": 60,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "ironPants",
@@ -1398,7 +1444,8 @@ window.GameDatabase={
       "atk": 0,
       "def": 3,
       "price": 140,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "ringPants",
@@ -1407,7 +1454,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 0,
       "def": 5,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "obsidianPants",
@@ -1416,7 +1464,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 0,
       "def": 7,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "lightBoots",
@@ -1426,7 +1475,8 @@ window.GameDatabase={
       "atk": 1,
       "def": 0,
       "price": 55,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "battleBoots",
@@ -1436,7 +1486,8 @@ window.GameDatabase={
       "atk": 1,
       "def": 2,
       "price": 125,
-      "shop": true
+      "shop": true,
+      "weaponStyle": null
     },
     {
       "id": "windBoots",
@@ -1445,7 +1496,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 2,
       "def": 3,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "starBoots",
@@ -1454,7 +1506,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 3,
       "def": 4,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "autoNecklace1",
@@ -1463,7 +1516,8 @@ window.GameDatabase={
       "lv": 1,
       "atk": 0,
       "def": 1,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "autoNecklace2",
@@ -1472,7 +1526,8 @@ window.GameDatabase={
       "lv": 2,
       "atk": 0,
       "def": 2,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "autoNecklace3",
@@ -1481,7 +1536,8 @@ window.GameDatabase={
       "lv": 3,
       "atk": 1,
       "def": 2,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     },
     {
       "id": "autoNecklace4",
@@ -1490,7 +1546,8 @@ window.GameDatabase={
       "lv": 4,
       "atk": 1,
       "def": 3,
-      "shop": false
+      "shop": false,
+      "weaponStyle": null
     }
   ],
   "affixes": [
@@ -1712,9 +1769,108 @@ window.GameDatabase={
         "material": "forgeStone"
       }
     }
+  ],
+  "artProfiles": [
+    {
+      "id": "sword",
+      "src": "assets/actors.png",
+      "row": 0,
+      "columns": 4,
+      "rows": 4
+    },
+    {
+      "id": "staff",
+      "src": "assets/actors.png",
+      "row": 1,
+      "columns": 4,
+      "rows": 4
+    },
+    {
+      "id": "bow",
+      "src": "assets/actors.png",
+      "row": 2,
+      "columns": 4,
+      "rows": 4
+    },
+    {
+      "id": "daggers",
+      "src": "assets/actors.png",
+      "row": 3,
+      "columns": 4,
+      "rows": 4
+    },
+    {
+      "id": "blade",
+      "src": "assets/heavy-actors.png",
+      "row": 0,
+      "columns": 4,
+      "rows": 2
+    },
+    {
+      "id": "hammer",
+      "src": "assets/heavy-actors.png",
+      "row": 1,
+      "columns": 4,
+      "rows": 2
+    }
+  ],
+  "npcPortraits": [
+    {
+      "id": "herbalist",
+      "src": "assets/npc-herbalist.png"
+    },
+    {
+      "id": "smith",
+      "src": "assets/npc-smith.png"
+    },
+    {
+      "id": "elder",
+      "src": "assets/npc-elder.png"
+    },
+    {
+      "id": "trainer",
+      "src": "assets/npc-trainer.png"
+    },
+    {
+      "id": "sage",
+      "src": "assets/npc-sage.png"
+    },
+    {
+      "id": "guide",
+      "src": "assets/npc-guide.png"
+    },
+    {
+      "id": "merchant",
+      "src": "assets/npc-merchant.png"
+    },
+    {
+      "id": "inn",
+      "src": "assets/npc-inn.png"
+    },
+    {
+      "id": "quest1",
+      "src": "assets/npc-quest1.png"
+    },
+    {
+      "id": "quest2",
+      "src": "assets/npc-quest2.png"
+    },
+    {
+      "id": "quest3",
+      "src": "assets/npc-quest3.png"
+    },
+    {
+      "id": "quest4",
+      "src": "assets/npc-quest4.png"
+    },
+    {
+      "id": "quest5",
+      "src": "assets/npc-quest5.png"
+    }
   ]
 },
- migrate(){for(const [name,schema] of Object.entries(this.schemas)){const table=this.tables[name]||(this.tables[name]=[]);for(const row of table)for(const [field,value] of Object.entries(schema))if(row[field]===undefined)row[field]=structuredClone(value)}return this},
- validate(){const errors=[],ids={};for(const [name,rows] of Object.entries(this.tables)){ids[name]=new Set;for(const row of rows){if('id'in row){if(!row.id)errors.push(name+' 有空白 id');else if(ids[name].has(row.id))errors.push(name+' 重複 id: '+row.id);else ids[name].add(row.id)}}}for(const r of this.tables.lootDrops){if(!ids.monsters.has(r.monsterId))errors.push('掉落表找不到怪物: '+r.monsterId);if(!ids.materials.has(r.itemId))errors.push('掉落表找不到素材: '+r.itemId);if(r.chance<0||r.chance>1)errors.push('掉落率超出範圍: '+r.monsterId+'/'+r.itemId)}for(const r of this.tables.regionalDrops){if(!ids.consumables.has(r.itemId))errors.push('區域掉落找不到道具: '+r.itemId)}const questFloors=new Set;for(const q of this.tables.quests){const floor=String(q.floor);if(!ids.regions.has(floor))errors.push('任務表找不到樓層區域: '+q.id+'/'+q.floor);else if(questFloors.has(floor))errors.push('任務表樓層重複: '+q.floor);else questFloors.add(floor)}if(errors.length)throw new Error('GameDatabase 驗證失敗\n'+errors.join('\n'));return true},
+ migrate(){for(const [name,schema] of Object.entries(this.schemas)){const table=this.tables[name]||(this.tables[name]=[]);for(const row of table)for(const [field,value] of Object.entries(schema))if(row[field]===undefined)row[field]=structuredClone(value)}for(const row of this.tables.equipment)if(row.slot==='weapon'&&!row.weaponStyle){const id=row.id||'';row.weaponStyle=id.startsWith('metalSword')?'sword':id.startsWith('woodBow')?'bow':id.startsWith('waterStaff')?'staff':id.startsWith('fireBlade')?'blade':id.startsWith('earthHammer')?'hammer':null}return this},
+ validate(){const errors=[],ids={};for(const [name,rows] of Object.entries(this.tables)){ids[name]=new Set;for(const row of rows){if('id'in row){if(!row.id)errors.push(name+' 有空白 id');else if(ids[name].has(row.id))errors.push(name+' 重複 id: '+row.id);else ids[name].add(row.id)}}}for(const r of this.tables.lootDrops){if(!ids.monsters.has(r.monsterId))errors.push('掉落表找不到怪物: '+r.monsterId);if(!ids.materials.has(r.itemId))errors.push('掉落表找不到素材: '+r.itemId);if(r.chance<0||r.chance>1)errors.push('掉落率超出範圍: '+r.monsterId+'/'+r.itemId)}for(const r of this.tables.regionalDrops){if(!ids.consumables.has(r.itemId))errors.push('區域掉落找不到道具: '+r.itemId)}const questFloors=new Set;for(const q of this.tables.quests){const floor=String(q.floor);if(!ids.regions.has(floor))errors.push('任務表找不到樓層區域: '+q.id+'/'+q.floor);else if(questFloors.has(floor))errors.push('任務表樓層重複: '+q.floor);else questFloors.add(floor)}for(const row of this.tables.equipment)if(row.weaponStyle&&!ids.artProfiles.has(row.weaponStyle))errors.push('武器造型不存在: '+row.id);for(const row of this.tables.artProfiles)if(!Number.isInteger(row.row)||row.row<0||row.row>=row.rows||row.columns!==4||!/^assets\/[a-zA-Z0-9_-]+\.png$/.test(row.src))errors.push('圖集座標或路徑錯誤: '+row.id);for(const row of this.tables.npcPortraits)if(!/^assets\/[a-zA-Z0-9_-]+\.png$/.test(row.src))errors.push('頭像路徑錯誤: '+row.id);if(errors.length)throw new Error('GameDatabase 驗證失敗\n'+errors.join('\n'));return true},
  apply(content){this.migrate().validate();const map=(name)=>Object.fromEntries(this.tables[name].map(({id,...row})=>[id,row]));content.regions=map('regions');content.monsters=this.tables.monsters.map(x=>({...x}));content.items=map('materials');content.consumables=map('consumables');content.shop=Object.fromEntries(this.tables.consumables.filter(x=>x.shop&&x.price!=null).map(({id,n,d,price})=>[id,{n,d,price}]));content.drops={};for(const r of this.tables.lootDrops)(content.drops[r.monsterId]??=[]).push({k:r.itemId,p:r.chance});content.regionalConsumables=this.tables.regionalDrops.map(r=>({k:r.itemId,p:r.chance}));content.equipmentBases=map('equipment');content.equipmentShop=this.tables.equipment.filter(x=>x.shop).map(x=>x.id);content.affixes=map('affixes');content.sets=map('sets');content.quests=Object.fromEntries(this.tables.quests.map(({floor,...row})=>[floor,row]));content.floorEnemies=Object.fromEntries(this.tables.regions.map(r=>[r.id,r.enemies]));content.bossByFloor=Object.fromEntries(this.tables.regions.map(r=>[r.id,r.boss]));return content}
 };
+
