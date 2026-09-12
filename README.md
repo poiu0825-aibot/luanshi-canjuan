@@ -13,7 +13,7 @@
 - 版本號採 `主版號.功能版號.修正版號`。
 - GitHub 的每次提交會保留歷次程式版本。
 
-目前版本：v0.22.1
+目前版本：v0.23.0
 
 平衡與內容維護請參考 [`DATA_MAINTENANCE.md`](DATA_MAINTENANCE.md)。
 

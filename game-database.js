@@ -1,6 +1,6 @@
-/* 亂世殘卷資料庫 v4：保留怪物 artRole，新增武器造型與 NPC 圖片映射。 */
+/* 亂世殘卷資料庫 v5：全怪物圖集對應、武器圖集與 NPC 頭像。 */
 window.GameDatabase={
- schemaVersion:4,
+ schemaVersion:5,
  schemas:{
   "regions": {
     "id": null,
@@ -28,7 +28,8 @@ window.GameDatabase={
     "gold": 0,
     "exp": 0,
     "boss": false,
-    "artRole": "creature"
+    "artRole": "creature",
+    "spriteProfile": null
   },
   "materials": {
     "id": null,
@@ -109,7 +110,14 @@ window.GameDatabase={
     "src": "assets/actors.png",
     "row": 0,
     "columns": 4,
-    "rows": 4
+    "rows": 4,
+    "flipX": false,
+    "flipFrames": [
+      false,
+      false,
+      false,
+      false
+    ]
   },
   "npcPortraits": {
     "id": null,
@@ -211,7 +219,8 @@ window.GameDatabase={
       ],
       "gold": 18,
       "exp": 30,
-      "artRole": "wolf"
+      "artRole": "wolf",
+      "spriteProfile": "monster_wolf"
     },
     {
       "id": "boar",
@@ -228,7 +237,8 @@ window.GameDatabase={
       ],
       "gold": 22,
       "exp": 32,
-      "artRole": "boar"
+      "artRole": "boar",
+      "spriteProfile": "monster_boar"
     },
     {
       "id": "beastkin",
@@ -246,7 +256,8 @@ window.GameDatabase={
       ],
       "gold": 26,
       "exp": 36,
-      "artRole": "claws"
+      "artRole": "claws",
+      "spriteProfile": "monster_beastkin"
     },
     {
       "id": "fangLord",
@@ -265,7 +276,8 @@ window.GameDatabase={
       "gold": 105,
       "exp": 145,
       "boss": true,
-      "artRole": "clawsBoss"
+      "artRole": "clawsBoss",
+      "spriteProfile": "monster_fangLord"
     },
     {
       "id": "raider",
@@ -283,7 +295,8 @@ window.GameDatabase={
       ],
       "gold": 20,
       "exp": 28,
-      "artRole": "cleaver"
+      "artRole": "cleaver",
+      "spriteProfile": "monster_raider"
     },
     {
       "id": "adept",
@@ -300,7 +313,8 @@ window.GameDatabase={
       ],
       "gold": 24,
       "exp": 32,
-      "artRole": "talisman"
+      "artRole": "talisman",
+      "spriteProfile": "monster_adept"
     },
     {
       "id": "soldier",
@@ -317,7 +331,8 @@ window.GameDatabase={
       ],
       "gold": 28,
       "exp": 36,
-      "artRole": "spear"
+      "artRole": "spear",
+      "spriteProfile": "monster_soldier"
     },
     {
       "id": "guardian",
@@ -337,7 +352,8 @@ window.GameDatabase={
       "gold": 145,
       "exp": 205,
       "boss": true,
-      "artRole": "glaiveBoss"
+      "artRole": "glaiveBoss",
+      "spriteProfile": "monster_guardian"
     },
     {
       "id": "spider",
@@ -354,7 +370,8 @@ window.GameDatabase={
       ],
       "gold": 22,
       "exp": 34,
-      "artRole": "spider"
+      "artRole": "spider",
+      "spriteProfile": "monster_spider"
     },
     {
       "id": "mantis",
@@ -372,7 +389,8 @@ window.GameDatabase={
       ],
       "gold": 31,
       "exp": 42,
-      "artRole": "mantis"
+      "artRole": "mantis",
+      "spriteProfile": "monster_mantis"
     },
     {
       "id": "beetle",
@@ -389,7 +407,8 @@ window.GameDatabase={
       ],
       "gold": 34,
       "exp": 45,
-      "artRole": "beetle"
+      "artRole": "beetle",
+      "spriteProfile": "monster_beetle"
     },
     {
       "id": "broodQueen",
@@ -409,7 +428,8 @@ window.GameDatabase={
       "gold": 190,
       "exp": 260,
       "boss": true,
-      "artRole": "spiderBoss"
+      "artRole": "spiderBoss",
+      "spriteProfile": "monster_broodQueen"
     },
     {
       "id": "hawk",
@@ -427,7 +447,8 @@ window.GameDatabase={
       ],
       "gold": 34,
       "exp": 48,
-      "artRole": "hawk"
+      "artRole": "hawk",
+      "spriteProfile": "monster_hawk"
     },
     {
       "id": "caveBat",
@@ -444,7 +465,8 @@ window.GameDatabase={
       ],
       "gold": 35,
       "exp": 49,
-      "artRole": "bat"
+      "artRole": "bat",
+      "spriteProfile": "monster_caveBat"
     },
     {
       "id": "windRaptor",
@@ -462,7 +484,8 @@ window.GameDatabase={
       ],
       "gold": 42,
       "exp": 58,
-      "artRole": "raptor"
+      "artRole": "raptor",
+      "spriteProfile": "monster_windRaptor"
     },
     {
       "id": "stormRoc",
@@ -482,7 +505,8 @@ window.GameDatabase={
       "gold": 235,
       "exp": 325,
       "boss": true,
-      "artRole": "rocBoss"
+      "artRole": "rocBoss",
+      "spriteProfile": "monster_stormRoc"
     },
     {
       "id": "lizardScout",
@@ -500,7 +524,8 @@ window.GameDatabase={
       ],
       "gold": 43,
       "exp": 62,
-      "artRole": "daggersLizard"
+      "artRole": "daggersLizard",
+      "spriteProfile": "monster_lizardScout"
     },
     {
       "id": "lizardShaman",
@@ -518,7 +543,8 @@ window.GameDatabase={
       ],
       "gold": 48,
       "exp": 68,
-      "artRole": "staffLizard"
+      "artRole": "staffLizard",
+      "spriteProfile": "monster_lizardShaman"
     },
     {
       "id": "lizardGuard",
@@ -536,7 +562,8 @@ window.GameDatabase={
       ],
       "gold": 52,
       "exp": 74,
-      "artRole": "shieldLizard"
+      "artRole": "shieldLizard",
+      "spriteProfile": "monster_lizardGuard"
     },
     {
       "id": "scaleWarlord",
@@ -556,7 +583,8 @@ window.GameDatabase={
       "gold": 310,
       "exp": 420,
       "boss": true,
-      "artRole": "glaiveLizardBoss"
+      "artRole": "glaiveLizardBoss",
+      "spriteProfile": "monster_scaleWarlord"
     }
   ],
   "materials": [
@@ -1776,42 +1804,364 @@ window.GameDatabase={
       "src": "assets/actors.png",
       "row": 0,
       "columns": 4,
-      "rows": 4
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
     },
     {
       "id": "staff",
       "src": "assets/actors.png",
       "row": 1,
       "columns": 4,
-      "rows": 4
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
     },
     {
       "id": "bow",
       "src": "assets/actors.png",
       "row": 2,
       "columns": 4,
-      "rows": 4
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
     },
     {
       "id": "daggers",
       "src": "assets/actors.png",
       "row": 3,
       "columns": 4,
-      "rows": 4
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
     },
     {
       "id": "blade",
       "src": "assets/heavy-actors.png",
       "row": 0,
       "columns": 4,
-      "rows": 2
+      "rows": 2,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
     },
     {
       "id": "hammer",
       "src": "assets/heavy-actors.png",
       "row": 1,
       "columns": 4,
-      "rows": 2
+      "rows": 2,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_wolf",
+      "src": "assets/monsters-beast.png",
+      "row": 0,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_boar",
+      "src": "assets/monsters-beast.png",
+      "row": 1,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_beastkin",
+      "src": "assets/monsters-beast.png",
+      "row": 2,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_fangLord",
+      "src": "assets/monsters-beast.png",
+      "row": 3,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_raider",
+      "src": "assets/monsters-human.png",
+      "row": 0,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "id": "monster_adept",
+      "src": "assets/monsters-human.png",
+      "row": 1,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "id": "monster_soldier",
+      "src": "assets/monsters-human.png",
+      "row": 2,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "id": "monster_guardian",
+      "src": "assets/monsters-human.png",
+      "row": 3,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_spider",
+      "src": "assets/monsters-insect.png",
+      "row": 0,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_mantis",
+      "src": "assets/monsters-insect.png",
+      "row": 1,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_beetle",
+      "src": "assets/monsters-insect.png",
+      "row": 2,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_broodQueen",
+      "src": "assets/monsters-insect.png",
+      "row": 3,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_hawk",
+      "src": "assets/monsters-flying.png",
+      "row": 0,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_caveBat",
+      "src": "assets/monsters-flying.png",
+      "row": 1,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_windRaptor",
+      "src": "assets/monsters-flying.png",
+      "row": 2,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_stormRoc",
+      "src": "assets/monsters-flying.png",
+      "row": 3,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_lizardScout",
+      "src": "assets/monsters-lizard.png",
+      "row": 0,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_lizardShaman",
+      "src": "assets/monsters-lizard.png",
+      "row": 1,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "monster_lizardGuard",
+      "src": "assets/monsters-lizard.png",
+      "row": 2,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "monster_scaleWarlord",
+      "src": "assets/monsters-lizard.png",
+      "row": 3,
+      "columns": 4,
+      "rows": 4,
+      "flipX": false,
+      "flipFrames": [
+        false,
+        true,
+        false,
+        false
+      ]
     }
   ],
   "npcPortraits": [
@@ -1869,8 +2219,8 @@ window.GameDatabase={
     }
   ]
 },
- migrate(){for(const [name,schema] of Object.entries(this.schemas)){const table=this.tables[name]||(this.tables[name]=[]);for(const row of table)for(const [field,value] of Object.entries(schema))if(row[field]===undefined)row[field]=structuredClone(value)}for(const row of this.tables.equipment)if(row.slot==='weapon'&&!row.weaponStyle){const id=row.id||'';row.weaponStyle=id.startsWith('metalSword')?'sword':id.startsWith('woodBow')?'bow':id.startsWith('waterStaff')?'staff':id.startsWith('fireBlade')?'blade':id.startsWith('earthHammer')?'hammer':null}return this},
- validate(){const errors=[],ids={};for(const [name,rows] of Object.entries(this.tables)){ids[name]=new Set;for(const row of rows){if('id'in row){if(!row.id)errors.push(name+' 有空白 id');else if(ids[name].has(row.id))errors.push(name+' 重複 id: '+row.id);else ids[name].add(row.id)}}}for(const r of this.tables.lootDrops){if(!ids.monsters.has(r.monsterId))errors.push('掉落表找不到怪物: '+r.monsterId);if(!ids.materials.has(r.itemId))errors.push('掉落表找不到素材: '+r.itemId);if(r.chance<0||r.chance>1)errors.push('掉落率超出範圍: '+r.monsterId+'/'+r.itemId)}for(const r of this.tables.regionalDrops){if(!ids.consumables.has(r.itemId))errors.push('區域掉落找不到道具: '+r.itemId)}const questFloors=new Set;for(const q of this.tables.quests){const floor=String(q.floor);if(!ids.regions.has(floor))errors.push('任務表找不到樓層區域: '+q.id+'/'+q.floor);else if(questFloors.has(floor))errors.push('任務表樓層重複: '+q.floor);else questFloors.add(floor)}for(const row of this.tables.equipment)if(row.weaponStyle&&!ids.artProfiles.has(row.weaponStyle))errors.push('武器造型不存在: '+row.id);for(const row of this.tables.artProfiles)if(!Number.isInteger(row.row)||row.row<0||row.row>=row.rows||row.columns!==4||!/^assets\/[a-zA-Z0-9_-]+\.png$/.test(row.src))errors.push('圖集座標或路徑錯誤: '+row.id);for(const row of this.tables.npcPortraits)if(!/^assets\/[a-zA-Z0-9_-]+\.png$/.test(row.src))errors.push('頭像路徑錯誤: '+row.id);if(errors.length)throw new Error('GameDatabase 驗證失敗\n'+errors.join('\n'));return true},
+ migrate(){for(const [name,schema] of Object.entries(this.schemas)){const table=this.tables[name]||(this.tables[name]=[]);for(const row of table)for(const [field,value] of Object.entries(schema))if(row[field]===undefined)row[field]=structuredClone(value)}for(const row of this.tables.equipment)if(row.slot==='weapon'&&!row.weaponStyle){const id=row.id||'';row.weaponStyle=id.startsWith('metalSword')?'sword':id.startsWith('woodBow')?'bow':id.startsWith('waterStaff')?'staff':id.startsWith('fireBlade')?'blade':id.startsWith('earthHammer')?'hammer':null}for(const m of this.tables.monsters)if(!m.spriteProfile&&this.tables.artProfiles.some(p=>p.id==='monster_'+m.id))m.spriteProfile='monster_'+m.id;return this},
+ validate(){const errors=[],ids={};for(const [name,rows] of Object.entries(this.tables)){ids[name]=new Set;for(const row of rows){if('id'in row){if(!row.id)errors.push(name+' 有空白 id');else if(ids[name].has(row.id))errors.push(name+' 重複 id: '+row.id);else ids[name].add(row.id)}}}for(const r of this.tables.lootDrops){if(!ids.monsters.has(r.monsterId))errors.push('掉落表找不到怪物: '+r.monsterId);if(!ids.materials.has(r.itemId))errors.push('掉落表找不到素材: '+r.itemId);if(r.chance<0||r.chance>1)errors.push('掉落率超出範圍: '+r.monsterId+'/'+r.itemId)}for(const r of this.tables.regionalDrops){if(!ids.consumables.has(r.itemId))errors.push('區域掉落找不到道具: '+r.itemId)}const questFloors=new Set;for(const q of this.tables.quests){const floor=String(q.floor);if(!ids.regions.has(floor))errors.push('任務表找不到樓層區域: '+q.id+'/'+q.floor);else if(questFloors.has(floor))errors.push('任務表樓層重複: '+q.floor);else questFloors.add(floor)}for(const row of this.tables.equipment)if(row.weaponStyle&&!ids.artProfiles.has(row.weaponStyle))errors.push('武器造型不存在: '+row.id);for(const m of this.tables.monsters)if(!ids.artProfiles.has(m.spriteProfile))errors.push('怪物缺少圖像對應: '+m.id);for(const row of this.tables.artProfiles)if(!Array.isArray(row.flipFrames)||row.flipFrames.length!==4||row.flipFrames.some(x=>typeof x!=='boolean')||typeof row.flipX!=='boolean'||!Number.isInteger(row.rows)||row.rows<1||!Number.isInteger(row.row)||row.row<0||row.row>=row.rows||row.columns!==4||!/^assets\/[a-zA-Z0-9_-]+\.png$/.test(row.src))errors.push('圖集座標或路徑錯誤: '+row.id);for(const row of this.tables.npcPortraits)if(!/^assets\/[a-zA-Z0-9_-]+\.png$/.test(row.src))errors.push('頭像路徑錯誤: '+row.id);if(errors.length)throw new Error('GameDatabase 驗證失敗\n'+errors.join('\n'));return true},
  apply(content){this.migrate().validate();const map=(name)=>Object.fromEntries(this.tables[name].map(({id,...row})=>[id,row]));content.regions=map('regions');content.monsters=this.tables.monsters.map(x=>({...x}));content.items=map('materials');content.consumables=map('consumables');content.shop=Object.fromEntries(this.tables.consumables.filter(x=>x.shop&&x.price!=null).map(({id,n,d,price})=>[id,{n,d,price}]));content.drops={};for(const r of this.tables.lootDrops)(content.drops[r.monsterId]??=[]).push({k:r.itemId,p:r.chance});content.regionalConsumables=this.tables.regionalDrops.map(r=>({k:r.itemId,p:r.chance}));content.equipmentBases=map('equipment');content.equipmentShop=this.tables.equipment.filter(x=>x.shop).map(x=>x.id);content.affixes=map('affixes');content.sets=map('sets');content.quests=Object.fromEntries(this.tables.quests.map(({floor,...row})=>[floor,row]));content.floorEnemies=Object.fromEntries(this.tables.regions.map(r=>[r.id,r.enemies]));content.bossByFloor=Object.fromEntries(this.tables.regions.map(r=>[r.id,r.boss]));return content}
 };
 

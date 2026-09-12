@@ -55,3 +55,13 @@
 - Schema v4 的遷移會補 `weaponStyle`，並為既有五種武器主鍵補對應造型；新增武器須填入明確造型。驗證檢查外鍵及圖集座標。
 - 頭像使用 `<img>`，不可重新改成只繪製一次的 Canvas，否則對話內容重寫會清空影像。
 - 此版是戰鬥四幀造型，沒有新增四方向行走骨架；地圖操作保持既有規則。
+
+## v0.23.0 怪物美術維護
+
+- `monsters.spriteProfile` 外鍵指向 `artProfiles.id`。20 種既有怪物都各有獨立圖集列，包含首領。
+- `artProfiles.flipX` 是水平翻轉旗標，預設 false；圖集中的怪物預設朝左，若新素材朝右可改 true。
+- `artProfiles.flipFrames` 為四個布林值，逐幀控制額外水平翻轉，與 flipX 疊加；用於修正個別動作朝向，預設均 false。
+- 每個怪物圖集為 4 欄 × 4 列；四欄為待機、預備、攻擊、收勢。五個 `assets/monsters-*.png` 各對應一族。
+- 舊資料缺少 spriteProfile 時，會以 `monster_` 加怪物 id 找到同名圖集並補齊。新怪物需先建立圖集資料，外鍵缺失會阻擋資料驗證。
+- 主角與敵人共用 `art.spriteSize`、`lowSpriteSize`、`attackFrameMs`、`idleFrameMs`。此次 CONFIG 結構不變，維持 v3。
+- `artRole` 仍保留供圖片載入失敗時的舊繪製容錯使用，不影響怪物能力。
